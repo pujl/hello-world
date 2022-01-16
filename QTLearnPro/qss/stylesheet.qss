@@ -27,3 +27,22 @@ QPushButton:pressed
     border-radius:14px;
     font-size:14px;
 }
+
+QLabel[whatsThis="style1"]
+{
+    font-family:"黑体";
+    font-size:90px;
+    font-style:normal;
+    font-weight: bold;
+    color:rgb(0,0,0);
+}
+
+QLabel[whatsThis="style2"]
+{
+    font-family:"黑体";
+    font-size:44px;
+    font-style:normal;
+    font-weight: bold;
+    color:rgb(0,0,0);
+}
+
