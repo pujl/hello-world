@@ -1,0 +1,12 @@
+debug/netdataprocessdll.o
+debug/netrecvprocessthread.o
+debug/netsendprocessthread.o
+debug/nettcpclient.o
+debug/nettcpserver.o
+debug/netudpsocket.o
+debug/moc_netdataprocessdll.o
+debug/moc_netrecvprocessthread.o
+debug/moc_netsendprocessthread.o
+debug/moc_nettcpclient.o
+debug/moc_nettcpserver.o
+debug/moc_netudpsocket.o
