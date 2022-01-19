@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/MyQss">
-        <file>qss/stylesheet.qss</file>
-    </qresource>
-    <qresource prefix="/MyImage">
-        <file>image/exit1.jpg</file>
-        <file>image/exit2.jpg</file>
-    </qresource>
-</RCC>
