@@ -26,9 +26,9 @@ void TsWnd::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
     //画背景
-//    painter.setPen(Qt::NoPen);
-//    painter.setBrush(Qt::gray);
-//    painter.drawRect(rect());
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(Qt::gray);
+    painter.drawRect(rect());
 
     //画8个碰撞条。
     uint8_t MidSpace = 10;

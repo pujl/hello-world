@@ -39,8 +39,11 @@ private slots:
     void quitApplication();
     void updateTimerLabel();
     void connectPLC();
-    void connAllDevTimer();
+    void connDevSmallTimer();
     void recvPLCMSg(quint8 updateId,quint8 devCode);
+    void connDevBigTimer();
+    //发送命令定时器
+    void sendQryCmdTimer();
 private:
     QString ReadQssFile(const QString& filePath);
     //初始化设备
@@ -52,6 +55,6 @@ private:
     plcDev      *m_pLCDev;
     //连接设备用
     quint8      m_connDevNum;
-    QTimer      *m_connAllDevTimer;
+    QTimer      *m_connDevSmallTimer;
 };
 #endif // MAINWINDOW_H

@@ -46,3 +46,67 @@ QLabel[whatsThis="style2"]
     color:rgb(0,0,0);
 }
 
+QLabel[whatsThis="style3"]
+{
+    font-family:"黑体";
+    font-size:44px;
+    font-style:normal;
+    font-weight: bold;
+    color:rgb(255,255,0);
+}
+
+QLabel[whatsThis = "style4"]
+{
+    background-color:rgb(255,255,255);
+}
+
+QLabel[whatsThis = "style5"]
+{
+    background-color:rgb(0,255,0);
+}
+
+QLabel[whatsThis = "style6"]
+{
+    background-color:rgb(255,100,0);
+}
+
+QLabel[whatsThis = "style7"]
+{
+    font-family:"黑体";
+    font-size:50px;
+    font-style:normal;
+    font-weight: bold;
+    color:rgb(255,0,0);
+}
+
+QLabel[whatsThis = "style8"]
+{
+    font-family:"黑体";
+    font-size:38px;
+    font-style:normal;
+    font-weight: bold;
+    color:rgb(255,0,0);
+}
+
+QGroupBox
+{
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+    stop: 0 #E0E0E0, stop: 1 #FFFFFF);
+    border: 3px solid gray;
+    border-radius: 6px;
+    margin-top: 16px;
+    padding:-16 6px 0 6px;
+    left:10px;
+    font-family:"黑体";
+    font-size:35px;
+}
+
+QGroupBox::title
+{
+    subcontrol-origin:margin;
+    subcontrol-position:top center;
+    left:10px;
+    margin-left:0px;
+    padding:0 1px;
+
+}

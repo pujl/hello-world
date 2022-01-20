@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>876</width>
+    <width>1099</width>
     <height>612</height>
    </rect>
   </property>
@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="exitBtn">
     <property name="geometry">
      <rect>
-      <x>770</x>
+      <x>1000</x>
       <y>530</y>
       <width>75</width>
       <height>34</height>
@@ -72,10 +72,10 @@
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="connectPLC">
+   <widget class="QPushButton" name="connectPLCBtn">
     <property name="geometry">
      <rect>
-      <x>770</x>
+      <x>1000</x>
       <y>480</y>
       <width>75</width>
       <height>34</height>
@@ -85,13 +85,211 @@
      <string>连接PLC</string>
     </property>
    </widget>
+   <widget class="QGroupBox" name="exampleGrp">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>390</y>
+      <width>311</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>示例</string>
+    </property>
+    <widget class="QLabel" name="stopStripExamp">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>40</y>
+       <width>54</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>style4</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="normalStripExamp">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>80</y>
+       <width>54</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>style5</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="errStripExamp">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>120</y>
+       <width>54</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>style6</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="stopTxt">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>40</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>style7</string>
+     </property>
+     <property name="text">
+      <string>计划停止</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="normalTxt">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>80</y>
+       <width>91</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>style7</string>
+     </property>
+     <property name="text">
+      <string>正常</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="errTxt">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>120</y>
+       <width>71</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>style7</string>
+     </property>
+     <property name="text">
+      <string>异常</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="StateGrp">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>390</y>
+      <width>311</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>状态信息</string>
+    </property>
+    <widget class="QLabel" name="commStateTxt">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>40</y>
+       <width>54</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string/>
+     </property>
+     <property name="whatsThis">
+      <string>style8</string>
+     </property>
+     <property name="text">
+      <string>通信状态</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="allErrTxt">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>70</y>
+       <width>54</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string/>
+     </property>
+     <property name="whatsThis">
+      <string>style8</string>
+     </property>
+     <property name="text">
+      <string>综合异常</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lockStateTxt">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>100</y>
+       <width>54</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string/>
+     </property>
+     <property name="whatsThis">
+      <string>style8</string>
+     </property>
+     <property name="text">
+      <string>互锁切</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="PLCRunTxt">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>130</y>
+       <width>54</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="statusTip">
+      <string/>
+     </property>
+     <property name="whatsThis">
+      <string>style8</string>
+     </property>
+     <property name="text">
+      <string>PLC运行</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>876</width>
+     <width>1099</width>
      <height>22</height>
     </rect>
    </property>

@@ -24,8 +24,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->exitBtn->setStyleSheet(strStyle);
     ui->exitBtn->resize(60,60);
 
-    ui->connectPLC->setStyleSheet(strStyle);
-    ui->connectPLC->resize(60,60);
+    ui->connectPLCBtn->setStyleSheet(strStyle);
+    ui->connectPLCBtn->resize(60,60);
+    ui->connectPLCBtn->hide();
 
     ui->TitleLabel->setText("XXXX淋雨倾斜显示程序");
     ui->TitleLabel->setStyleSheet(strStyle);
@@ -36,26 +37,62 @@ MainWindow::MainWindow(QWidget *parent)
     ui->TimeLabel->setStyleSheet(strStyle);
     ui->TimeLabel->adjustSize();
 
-    QTimer *Labeltimer = new QTimer(this);
-    connect(Labeltimer,&QTimer::timeout,this,&MainWindow::updateTimerLabel);
-    Labeltimer->start(1000);
+    ui->exampleGrp->setStyleSheet(strStyle);
+    ui->exampleGrp->resize(450,350);
+    ui->stopStripExamp->resize(200,50);
+    ui->stopStripExamp->setStyleSheet(strStyle);
+    ui->normalStripExamp->resize(200,50);
+    ui->normalStripExamp->setStyleSheet(strStyle);
+    ui->errStripExamp->resize(200,50);
+    ui->errStripExamp->setStyleSheet(strStyle);
+
+    ui->stopTxt->setStyleSheet(strStyle);
+    ui->stopTxt->adjustSize();
+    ui->normalTxt->setStyleSheet(strStyle);
+    ui->normalTxt->adjustSize();
+    ui->errTxt->setStyleSheet(strStyle);
+    ui->errTxt->adjustSize();
+
+    ui->StateGrp->setStyleSheet(strStyle);
+    ui->StateGrp->resize(450,350);
+
+    ui->commStateTxt->setStyleSheet(strStyle);
+    ui->commStateTxt->adjustSize();
+    ui->allErrTxt->setStyleSheet(strStyle);
+    ui->allErrTxt->adjustSize();
+    ui->lockStateTxt->setStyleSheet(strStyle);
+    ui->lockStateTxt->adjustSize();
+    ui->PLCRunTxt->setStyleSheet(strStyle);
+    ui->PLCRunTxt->adjustSize();
+
+    QTimer *labeltimer = new QTimer(this);
+    labeltimer->start(1000);
+    connect(labeltimer,&QTimer::timeout,this,&MainWindow::updateTimerLabel);
 
     connect(ui->exitBtn,&QPushButton::clicked,this,&MainWindow::quitApplication);
-    connect(ui->connectPLC,&QPushButton::clicked,this,&MainWindow::connectPLC);
+    connect(ui->connectPLCBtn,&QPushButton::clicked,this,&MainWindow::connectPLC);
 
     //初始化设备
     InitDevComm();
     //定义设备连接定时器
-    m_connAllDevTimer = new QTimer(this);
-    m_connAllDevTimer->setInterval(100);
-    m_connAllDevTimer->start();
+    m_connDevSmallTimer = new QTimer(this);
+    m_connDevSmallTimer->setInterval(100);
+    m_connDevSmallTimer->start();
     m_connDevNum = 0;
-    connect(m_connAllDevTimer,&QTimer::timeout,this,&MainWindow::connAllDevTimer);
+    connect(m_connDevSmallTimer,&QTimer::timeout,this,&MainWindow::connDevSmallTimer);
     connect(m_pLCDev,SIGNAL(updateDevMsg(quint8,quint8)),this,SLOT(recvPLCMSg(quint8,quint8)));
 
+    QTimer *connDevBigTimer = new QTimer(this);
+    connDevBigTimer->setInterval(6000);
+    connDevBigTimer->start();
+    connect(connDevBigTimer,&QTimer::timeout,this,&MainWindow::connDevBigTimer);
+
+    QTimer *sendQryTimer = new QTimer(this);
+    sendQryTimer->setInterval(100);
+    sendQryTimer->start();
+    connect(sendQryTimer,&QTimer::timeout,this,&MainWindow::sendQryCmdTimer);
+
     m_TsWnd = new TsWnd(this);
-
-
 }
 
 MainWindow::~MainWindow()
@@ -93,7 +130,7 @@ void MainWindow::connectPLC()
     }
 }
 
-void MainWindow::connAllDevTimer()
+void MainWindow::connDevSmallTimer()
 {
     m_connDevNum++;
     switch(m_connDevNum)
@@ -103,7 +140,7 @@ void MainWindow::connAllDevTimer()
         break;
     default:
         m_connDevNum = 0;
-        m_connAllDevTimer->stop();
+        m_connDevSmallTimer->stop();
         break;
     }
 }
@@ -150,6 +187,19 @@ void MainWindow::recvPLCMSg(quint8 updateId,quint8 devCode)
     }
 }
 
+void MainWindow::connDevBigTimer()
+{
+    if(m_connDevNum == 0)
+    {
+        //重新连接
+        m_connDevSmallTimer->start();
+    }
+}
+
+void MainWindow::sendQryCmdTimer()
+{
+    m_pLCDev->SendQryCmd();
+}
 
 QString MainWindow::ReadQssFile(const QString& filePath)
 {
@@ -179,7 +229,7 @@ void MainWindow::UpdateSize()
     int y = this->geometry().height();
     ui->exitBtn->move(x-80,y-80);
 
-    ui->connectPLC->move(x-80,y-200);
+    ui->connectPLCBtn->move(x-80,y-200);
     //label
     int x1 = ui->TitleLabel->geometry().width();
     int y1 = ui->TitleLabel->geometry().height();
@@ -188,6 +238,23 @@ void MainWindow::UpdateSize()
     int x2 = ui->TimeLabel->geometry().width();
     int y2 = ui->TimeLabel->geometry().height();
     ui->TimeLabel->move(x-x2-10,y1/2-y2/2);
+
+    quint32 topSpace = y/6;
+    ui->exampleGrp->move(150,topSpace*4-20);
+
+    ui->stopStripExamp->move(20,80);
+    ui->normalStripExamp->move(20,170);
+    ui->errStripExamp->move(20,260);
+
+    ui->stopTxt->move(245,80);
+    ui->normalTxt->move(245,170);
+    ui->errTxt->move(245,260);
+
+    ui->StateGrp->move(750,topSpace*4-20);
+    ui->commStateTxt->move(20,50);
+    ui->allErrTxt->move(20,130);
+    ui->lockStateTxt->move(20,210);
+    ui->PLCRunTxt->move(20,290);
 
     m_TsWnd->resize(x,y/2);
     m_TsWnd->move(0,y1+50);
