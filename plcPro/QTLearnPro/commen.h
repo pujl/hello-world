@@ -20,9 +20,9 @@ const unsigned int		DEVID_RIGHT2 = 0x06;
 const unsigned int		DEVID_RIGHT3 = 0x07;
 const unsigned int		DEVID_RIGHT4 = 0x08;
 
-const QRgb INIT_CL      = 0x123456;
-const QRgb ERR_CL       = 0x111111;
-const QRgb NORMAL_CL    = 0x125634;
+const QRgb INIT_CL      = 0xffffff;
+const QRgb ERR_CL       = 0xff6400;
+const QRgb NORMAL_CL    = 0x00ff00;
 
 #pragma pack(push)
 #pragma pack(1)

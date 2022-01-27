@@ -6,6 +6,13 @@
 
 QMutex RevMutex;
 extern NETINFO ReadNetInfo;
+
+const unsigned char START_CHAR1 = 0x80;
+const unsigned char START_CHAR2 = 0x00;
+const unsigned char START_CHAR3 = 0x07;
+const unsigned char START_CHAR4 = 0x00;
+const unsigned char START_CHAR5 = 0x22;
+
 NetRecvProcessThread::NetRecvProcessThread(QObject *parent) : QObject(parent)
 {
     memset(Read_Buf,0,MAX_TEMP_BUFFER);
@@ -33,7 +40,6 @@ void NetRecvProcessThread::ProcessRevThread(const char* name,int devCode,unsigne
 
 void NetRecvProcessThread::ProcessNetRecv_7E(int devCode,unsigned char *info,unsigned long recvlen,unsigned char type) //
 {
-    type=type;
     unsigned long Curlen=(Write_Point+MAX_TEMP_BUFFER-Read_Point)%MAX_TEMP_BUFFER;//获得当前读写长度差
     if ((MAX_TEMP_BUFFER-Curlen)<=(unsigned long )recvlen)//清除缓冲区的内容
     {
@@ -122,7 +128,43 @@ void NetRecvProcessThread::ProcessNetRecv_7E(int devCode,unsigned char *info,uns
 
 void NetRecvProcessThread::ProcessNetRecv_NONE(int devCode,unsigned char *info,unsigned long recvlen,unsigned char type)
 {
-    ExpandBuffer(info,recvlen,(unsigned char)devCode);
+    unsigned long Curlen=(Write_Point+MAX_TEMP_BUFFER-Read_Point)%MAX_TEMP_BUFFER;//获得当前读写长度差
+    if ((MAX_TEMP_BUFFER-Curlen)<=(unsigned long )recvlen)//清除缓冲区的内容
+    {
+        return ;
+    }
+    int i=0;
+    for (i=0;i<(int)recvlen;i++)
+    {
+        Temp_Buf[Write_Point]=info[i];
+        Write_Point=(Write_Point+1)%MAX_TEMP_BUFFER;
+    }
+
+    unsigned int nlen = 0;
+    nlen = (Write_Point - Read_Point+MAX_TEMP_BUFFER)%MAX_TEMP_BUFFER;
+    while(nlen>=11)
+    {
+        if((Temp_Buf[Read_Point] == START_CHAR1)&&
+            (Temp_Buf[(Read_Point+1)%MAX_TEMP_BUFFER] == START_CHAR2)&&
+            (Temp_Buf[(Read_Point+2)%MAX_TEMP_BUFFER] == START_CHAR3)&&
+            (Temp_Buf[(Read_Point+3)%MAX_TEMP_BUFFER] == START_CHAR4)&&
+            (Temp_Buf[(Read_Point+4)%MAX_TEMP_BUFFER] == START_CHAR5))
+        {
+            //find head
+            for(unsigned int i = 0;i<6;i++)
+            {
+                Read_Buf[i] = Temp_Buf[(i+Read_Point+5)%MAX_TEMP_BUFFER];
+            }
+
+            ExpandBuffer(Read_Buf,6,(unsigned char)devCode);
+            Read_Point = (Read_Point+11)%MAX_TEMP_BUFFER;
+            nlen = (Write_Point - Read_Point + MAX_TEMP_BUFFER)%MAX_TEMP_BUFFER;
+        }else
+        {
+            Read_Point = (Read_Point + 1)%MAX_TEMP_BUFFER;
+            nlen = (Write_Point - Read_Point + MAX_TEMP_BUFFER)%MAX_TEMP_BUFFER;
+        }
+    }
 }
 
 void NetRecvProcessThread::ExpandBuffer(unsigned char *buffer, unsigned long len, unsigned char port)

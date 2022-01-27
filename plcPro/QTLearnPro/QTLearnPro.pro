@@ -1,6 +1,10 @@
 QT       += core gui
 QT       += core gui network
 
+RC_FILE = myicon.rc
+
+TARGET= PLC淋雨程序
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -45,9 +49,12 @@ RESOURCES += \
     MyRes.qrc
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../NetDataProcessDLL/ -lNetDataProcessDLL
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../NetDataProcessDLL/ -lNetDataProcessDLL
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../NetDataProcessDLL/release/ -lNetDataProcessDLL
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../NetDataProcessDLL/debug/ -lNetDataProcessDLL
 else:unix: LIBS += -L$$OUT_PWD/../NetDataProcessDLL/ -lNetDataProcessDLL
 
 INCLUDEPATH += $$PWD/../NetDataProcessDLL
 DEPENDPATH += $$PWD/../NetDataProcessDLL
+
+DISTFILES += \
+    myicon.rc

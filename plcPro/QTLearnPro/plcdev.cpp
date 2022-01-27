@@ -192,7 +192,7 @@ bool plcDev::JudgePLCStateChange(quint8 nId,CAR_STATE eState)
 
 void plcDev::SendQryCmd()
 {
-    if(GetDevLink())
+    if(GetDevLink() == LINK_SUCC)
     {
         unsigned char buf[11];
         buf[0] = 0x00;

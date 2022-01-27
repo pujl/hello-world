@@ -44,6 +44,7 @@ private slots:
     void connDevBigTimer();
     //发送命令定时器
     void sendQryCmdTimer();
+    void SetProperty(QWidget* pWidget,const char* per_name,const QVariant &perty,bool bfirst = false);
 private:
     QString ReadQssFile(const QString& filePath);
     //初始化设备
@@ -51,7 +52,7 @@ private:
 private:
     Ui::MainWindow *ui;
 
-    TsWnd       *m_TsWnd;
+    TsWnd       *m_pTsWnd;
     plcDev      *m_pLCDev;
     //连接设备用
     quint8      m_connDevNum;

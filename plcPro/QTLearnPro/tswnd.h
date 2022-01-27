@@ -10,6 +10,9 @@ class TsWnd : public QWidget
 public:
     explicit TsWnd(QWidget *parent = nullptr);
 
+public:
+    void SetCollisionStripsState(CAR_STATE eState,quint8 nId);
+    void SetIsPlanStop(bool bStop);
 protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);

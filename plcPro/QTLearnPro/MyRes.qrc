@@ -5,5 +5,12 @@
     <qresource prefix="/MyImage">
         <file>image/exit1.jpg</file>
         <file>image/exit2.jpg</file>
+        <file>image/grayLight.png</file>
+        <file>image/greenLight.png</file>
+        <file>image/redLight.png</file>
+        <file>image/yellowLight.png</file>
+        <file>image/crash.bmp</file>
+        <file>image/car.bmp</file>
+        <file>image/frame.png</file>
     </qresource>
 </RCC>
