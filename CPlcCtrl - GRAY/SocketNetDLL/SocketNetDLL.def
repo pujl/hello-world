@@ -1,0 +1,14 @@
+; SocketNetDLL.def : Declares the module parameters for the DLL.
+
+LIBRARY      "SocketNetDLL"
+DESCRIPTION  'SocketNetDLL Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+	INITTCPNET				@ 1
+	TCPNetClientSetting		@ 2
+	TCPNetServiceSetting    @ 3
+	SendNetData				@ 4
+	UDPNetSetting			@ 5
+	ExitNetDll				@ 6
+
